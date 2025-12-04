@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Paso 2 - Resumen y confirmación de la transferencia</title>
+</head>
+<body>
+<h1>Paso 2 de 2 - Resumen y confirmación de la transferencia</h1>
+
+<div>
+    <h2>Resumen de la transferencia programada</h2>
+    <p><strong>Cuenta de origen:</strong> <span th:text="${cuenta.id}"></span></p>
+    <p><strong>Beneficiario:</strong> <span th:text="${transferencia.nombreBeneficiario}"></span></p>
+    <p><strong>IBAN de destino:</strong> <span th:text="${transferencia.ibanDestino}"></span> €</p>
+    <br>
+    <p><strong>Importe:</strong> <span th:text="${transferencia.importe}"></span></p>
+    <p><strong>Concepto:</strong> <span th:text="${transferencia.concepto}"></span></p>
+    <p><strong>Fecha programada:</strong> <span th:text="${transferencia.fechaProgramada}"></span></p>
+</div>
+
+<div>
+    <h2>Verificación de seguridad</h2>
+    <p>Introduce tu código de confirmación (simulación):</p>
+    <br>
+    <form th:action="@{/transferencias/transferir/paso2}" th:object="${paso2DTO}" method="post">
+        <!-- Nombre -->
+        <label for="codigoConfirmacion">Código de confirmación: </label>
+        <input type="number" th:field="*{codigoConfirmacion}" id="codigoConfirmacion" min="1" required>
+        <br>
+        <div th:if="${#fields.hasErrors('nombreParticipante')}" th:errors="*{codigoConfirmacion}"></div>
+
+        <br><br>
+        <a th:href="@{/transferencias/transferir/paso1}">Volver al paso 1</a>
+        <button type="submit">Confirmar transferencia</button>
+
+    </form>
+</div>
+</body>
+</html>

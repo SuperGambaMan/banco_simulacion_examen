@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Borrar Inscripción</title>
+</head>
+<body>
+<h1>¿Desea borrar esta inscripción?</h1>
+<p>ID: <span th:text="${inscripcion.id}"></span></p>
+<p>Nombre: <span th:text="${inscripcion.nombreParticipante}"></span></p>
+<p>Email: <span th:text="${inscripcion.emailParticipante}"></span></p>
+
+<form th:action="@{/admin/inscripciones/borrar}" th:object="${inscripcion}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <button type="submit">Borrar</button>
+</form>
+<a th:href="@{/admin/inscripciones/index}">Volver</a>
+</body>
+</html>

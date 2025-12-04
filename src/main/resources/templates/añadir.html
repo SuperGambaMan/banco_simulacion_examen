@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Añadir Inscripción</title>
+</head>
+<body>
+<h1>Añadir Inscripción</h1>
+<form th:action="@{/admin/inscripciones/añadir}" th:object="${inscripcion}" method="post">
+    <label>Taller ID:</label>
+    <input type="number" th:field="*{tallerId}" required/><br/>
+
+    <label>Nombre Participante:</label>
+    <input type="text" th:field="*{nombreParticipante}" required/><br/>
+
+    <label>Email Participante:</label>
+    <input type="email" th:field="*{emailParticipante}" required/><br/>
+
+    <label>Número de Asistentes:</label>
+    <input type="number" th:field="*{numeroAsistentes}" required/><br/>
+
+    <button type="submit">Guardar</button>
+</form>
+<a th:href="@{/admin/inscripciones/index}">Volver</a>
+</body>
+</html>

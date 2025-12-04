@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Paso 1 - Datos de la transferencia</title>
+</head>
+<body>
+<h1>Paso 1 de 2 - Datos de la transferencia</h1>
+
+<form th:action="@{/transferencias/transferir/paso1}" th:object="${paso1DTO}" method="post">
+    <!-- Cuenta de Origen ID -->
+    <label for="cuentaOrigenId">Cuenta de origen:</label>
+    <select th:field="*{cuentaOrigenId}" id="cuentaOrigenId" required>
+        <option value="0">--Selecciona una cuenta--</option>
+        <option th:each="cuenta : ${cuentas}"
+                th:value="${cuenta.id}"
+                th:text="${cuenta.iban} +' '+ ${cuenta.aliasCuenta}">
+        </option>
+    </select>
+    <div th:if="${#fields.hasErrors('cuentaOrigenId')}" th:errors="*{cuentaOrigenId}"></div>
+
+    <br><br>
+
+    <!-- Nombre del beneficiario -->
+    <label for="nombreBeneficiario">Nombre del Beneficiario:</label>
+    <input type="text" th:field="*{nombreBeneficiario}" id="nombreBeneficiario" required>
+    <div th:if="${#fields.hasErrors('nombreBeneficiario')}" th:errors="*{nombreBeneficiario}"></div>
+    <br>
+    <!-- Iban de destino -->
+    <label for="ibanDestino">Iban de destino :</label>
+    <input type="number" th:field="*{ibanDestino}" id="ibanDestino" min="1" required>
+    <div th:if="${#fields.hasErrors('ibanDestino')}" th:errors="*{ibanDestino}"></div>
+
+    <br><br>
+
+    <!-- Importe -->
+    <label for="importe">Importe:</label>
+    <input type="number" th:field="*{importe}" id="importe" min="1" required>
+    <div th:if="${#fields.hasErrors('importe')}" th:errors="*{importe}"></div>
+    <br>
+    <!-- Concepto -->
+    <label for="concepto">Concepto:</label>
+    <input type="text" th:field="*{concepto}" id="concepto" required>
+    <div th:if="${#fields.hasErrors('concepto')}" th:errors="*{concepto}"></div>
+
+    <br><br>
+
+    <!-- Fecha programada -->
+    <label for="fechaProgramada">Fecha programada: </label>
+    <input type="datetime-local" th:field="*{fechaProgramada}" id="fechaProgramada" required>
+    <div th:if="${#fields.hasErrors('ibanDestino')}" th:errors="*{fechaProgramada}"></div>
+
+    <br><br>
+    <button disabled>Cancelar</button>
+    <button type="submit">Siguiente</button>
+
+</form>
+</body>
+</html>

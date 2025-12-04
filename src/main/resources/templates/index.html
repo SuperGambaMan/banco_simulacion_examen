@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Inscripciones</title>
+</head>
+<body>
+<h1>Listado de Inscripciones</h1>
+<a th:href="@{/admin/transferenciaeses/añadir}">Añadir nueva inscripción</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Taller</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Asistentes</th>
+        <th>Precio total</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="transferencia : ${transferencias}">
+        <td th:text="${transferencias.id}"></td>
+        <td th:text="${transferencias.}"></td>
+        <td th:text="${transferencias.}"></td>
+        <td th:text="${transferencias.}"></td>
+        <td th:text="${transferencias.}"></td>
+        <td th:text="${transferencias.}"></td>
+        <td>
+            <a th:href="@{/admin/transferencias/editar/{id}(id=${transferencias.id})}">Editar</a>
+            <a th:href="@{/admin/transferencias/borrar/{id}(id=${transferencias.id})}">Borrar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
