@@ -1,31 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Listado de Inscripciones</title>
+    <meta charset="UTF-8">
+    <title>Admin - Lista de transferencias</title>
 </head>
 <body>
-<h1>Listado de Inscripciones</h1>
-<a th:href="@{/admin/transferenciaeses/añadir}">Añadir nueva inscripción</a>
+<h2>Admin - Lista de transferencias</h2>
+<hr>
+<form method="post" th:action="@{/transferencia/final}">
+    <button type="submit">Añadir Transferencia nueva</button>
+</form>
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Taller</th>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Asistentes</th>
-        <th>Precio total</th>
+        <th>Cuenta origen</th>
+        <th>Beneficiario</th>
+        <th>Iban destino</th>
+        <th>Fecha programada</th>
+        <th>Importe</th>
+        <th>Estado</th>
         <th>Acciones</th>
     </tr>
-    <tr th:each="transferencia : ${transferencias}">
-        <td th:text="${transferencias.id}"></td>
-        <td th:text="${transferencias.}"></td>
-        <td th:text="${transferencias.}"></td>
-        <td th:text="${transferencias.}"></td>
-        <td th:text="${transferencias.}"></td>
-        <td th:text="${transferencias.}"></td>
+    <tr th:each="t:${transferencias}">
+        <td th:text="${t.id}"></td>
+        <td th:text="${t.cuentaOrigenId}"></td>
+        <td th:text="${t.nombreBeneficiario}"></td>
+        <td th:text="${t.ibanDestino}"></td>
+        <td th:text="${t.fechaProgramada}"></td>
+        <td th:text="${t.importe}"></td>
+        <td th:text="${t.estado}"></td>
         <td>
-            <a th:href="@{/admin/transferencias/editar/{id}(id=${transferencias.id})}">Editar</a>
-            <a th:href="@{/admin/transferencias/borrar/{id}(id=${transferencias.id})}">Borrar</a>
+            <a th:href="@{'/transferencia/admin/editar/' + ${t.id}}"><button type="button">Editar</button></a>
+            <a th:href="@{'/transferencia/admin/borrar/' + ${t.id}}"><button type="button">Borrar</button></a>
+
         </td>
     </tr>
 </table>

@@ -1,12 +1,11 @@
 package org.iesvdm.banco_simulacion.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,23 +16,25 @@ import java.time.LocalDateTime;
 @Builder
 public class Paso1DTO {
 
-    @NotNull(message= "Debe indicar la cuenta de origen")
-    private long cuentaOrigenId;
+    @NotNull(message="Debes seleccionar una cuenta")
+    private Long cuentaOrigenId;
 
-    @NotEmpty(message = "Debe indicar el nombre del beneficiario")
+    @NotBlank(message = "No puedes dejar vacío el Nombre de Beneficiario")
     private String nombreBeneficiario;
 
-    @NotEmpty(message = "Debe indicar el IBAN de destino")
+    @Size(min=1, max=29, message = "No se puede poner más de 24 dígitos")
     private String ibanDestino;
 
-    @NotNull(message = "Debe indicar el importe")
-    @Min(value = 1, message = "El importe debe ser al menos 1")
+    @NotNull(message = "No puedes dejarlo vacío el importe")
+    @Min(value=1, message= "Tienes que poner una cifra mínimo")
     private BigDecimal importe;
 
-    @NotEmpty(message = "Debe indicar el concepto")
+    @Size(min = 1, max = 50, message = "El concepto solo puede tener 50 caracteres")
     private String concepto;
 
-//    @NotEmpty(message = "Debe indicar la fecha programada")
+    @FutureOrPresent(message = "Debes de ser mas adelante de ahora mismo")
+    @NotNull(message = "Debes introducir una fecha")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime fechaProgramada;
 
 }

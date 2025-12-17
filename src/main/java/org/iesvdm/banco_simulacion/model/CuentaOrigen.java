@@ -6,15 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class CuentaOrigen {
-
-    long id;
-
-    String aliasCuenta;
-
-    String iban;
-
+    private Long id;
+    private String aliasCuenta;
+    private String iban;
 }

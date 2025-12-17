@@ -1,8 +1,6 @@
 package org.iesvdm.banco_simulacion.dto;
 
-import jakarta.validation.OverridesAttribute;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Paso2DTO {
 
-    @NotBlank (message = "El codigo es obligatorio")
-    @Pattern(message = "El codigo debe ser 123456", regexp = "^[0-9]{6}$")
-    private int codigoConfirmacion;
-
+    @NotNull(message = "El código es obligatorio")
+    @Pattern(regexp = "^\\d{4}$", message = "El código debe tener exactamente 4 dígitos (0000-9999)")
+    private String codigo;
 }

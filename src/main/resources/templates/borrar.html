@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Borrar Inscripción</title>
+    <meta charset="UTF-8">
+    <title>Eliminar transferencia</title>
 </head>
 <body>
-<h1>¿Desea borrar esta inscripción?</h1>
-<p>ID: <span th:text="${inscripcion.id}"></span></p>
-<p>Nombre: <span th:text="${inscripcion.nombreParticipante}"></span></p>
-<p>Email: <span th:text="${inscripcion.emailParticipante}"></span></p>
-
-<form th:action="@{/admin/inscripciones/borrar}" th:object="${inscripcion}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <button type="submit">Borrar</button>
+<form method="post" th:action="@{/transferencia/admin/borrar}" th:object="${transferencia}">
+    <h2>¿Deseas eliminar esta transferencia?</h2>
+    <label>Cuenta origen:</label><span th:text="*{cuentaOrigenId}"></span>
+    <br>
+    <label>Nombre beneficiario:</label><span th:text="*{nombreBeneficiario}"></span>
+    <br>
+    <label>Iban destino:</label><span th:text="*{ibanDestino}"></span>
+    <br>
+    <label>Importe:</label><span th:text="*{importe}"></span>€
+    <br>
+    <button>Borrar definitivamente</button>
 </form>
-<a th:href="@{/admin/inscripciones/index}">Volver</a>
 </body>
 </html>

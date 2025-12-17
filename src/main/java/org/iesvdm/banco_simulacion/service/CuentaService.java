@@ -1,65 +1,50 @@
 package org.iesvdm.banco_simulacion.service;
 
-
-import lombok.extern.slf4j.Slf4j;
 import org.iesvdm.banco_simulacion.model.CuentaOrigen;
-import org.iesvdm.banco_simulacion.model.Transferencia;
-import org.iesvdm.banco_simulacion.repository.CuentaOrigenRepository;
-import org.iesvdm.banco_simulacion.repository.TransferenciaRepository;
+import org.iesvdm.banco_simulacion.model.TransferenciaProgramada;
+import org.iesvdm.banco_simulacion.repository.CuentaRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-@Slf4j
 @Service
 public class CuentaService {
 
+    private final CuentaRepository cuentaRepository;
 
-    private final CuentaOrigenRepository cuentaOrigenRepository;
-    private final TransferenciaRepository transferenciaRepository;
 
-    public CuentaService(CuentaOrigenRepository cuentaOrigenRepository, TransferenciaRepository transferenciaRepository) {
-        this.cuentaOrigenRepository = cuentaOrigenRepository;
-        this.transferenciaRepository = transferenciaRepository;
+    public CuentaService(CuentaRepository cuentaRepository) {
+        this.cuentaRepository = cuentaRepository;
     }
 
-    //CuentaOrigen
-    // Obtener todos los cuentaOrigen
-    public List<CuentaOrigen> getAllCuentas() {
-        return cuentaOrigenRepository.findAll();
+    //Cuenta_Origen
+    public List<CuentaOrigen> listarCuentas(){
+        return cuentaRepository.findAllCuentas();
     }
 
-    // Obtener un cuentaOrigen por su ID
-    public CuentaOrigen findCuentaById(int id) {
-        return cuentaOrigenRepository.findById(id);
+    public  CuentaOrigen buscarCuentaId(Long id){
+        return cuentaRepository.findCuentaById(id);
     }
 
-    // Guardar una inscripción en la base de datos
-    public void guardarTransferencia(Transferencia inscripcion) {
-        transferenciaRepository.save(inscripcion);
+    //Transferencia_programada
+    public List<TransferenciaProgramada> listarTransferencias(){
+        return cuentaRepository.findAllTransferencias();
     }
 
-    // Listar todas las inscripciones
-    public List<Transferencia> listarTransferencias() {
-        return transferenciaRepository.findAll();
+    public  TransferenciaProgramada buscarTransferenciaId(Long id){
+        return cuentaRepository.findTransferenciaById(id);
     }
 
-    //Admin
-    public Transferencia findTransferenciaById(long id) {
-        return transferenciaRepository.findById(id);
+    //CRUD de Transferencia
+    public void crearTransferencia (TransferenciaProgramada transferenciaProgramada){
+        cuentaRepository.crearTrans(transferenciaProgramada);
     }
 
-    public void editarTransferencia(long id, Transferencia nuevaTransferencia) {
-        nuevaTransferencia.setId(id);
-        CuentaOrigen cuentaOrigen = findCuentaById((int) nuevaTransferencia.getCuentaOrigenId());
-        nuevaTransferencia.setNombreBeneficiario(nuevaTransferencia.getNombreBeneficiario());
-        //..AÑADIR LOS DEMAS CAMPOS
-        transferenciaRepository.update(nuevaTransferencia);
+    public void editarTransferencia (TransferenciaProgramada transferenciaProgramada){
+        cuentaRepository.editarTrans(transferenciaProgramada);
     }
 
-    public void eliminarTransferencia(int id) {
-        transferenciaRepository.deleteById(id);
+    public void eliminarTransferencia (Long id){
+        cuentaRepository.eliminarTrans(id);
     }
-
 }

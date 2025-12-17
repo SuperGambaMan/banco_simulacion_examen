@@ -1,39 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Paso 2 - Resumen y confirmación de la transferencia</title>
+    <title>Paso 2 - Resumen de Transferencia</title>
 </head>
 <body>
-<h1>Paso 2 de 2 - Resumen y confirmación de la transferencia</h1>
-
-<div>
-    <h2>Resumen de la transferencia programada</h2>
-    <p><strong>Cuenta de origen:</strong> <span th:text="${cuenta.id}"></span></p>
-    <p><strong>Beneficiario:</strong> <span th:text="${transferencia.nombreBeneficiario}"></span></p>
-    <p><strong>IBAN de destino:</strong> <span th:text="${transferencia.ibanDestino}"></span> €</p>
+<h2>PASO 2 – RESUMEN DE TRANSFERENCIA</h2>
+<hr>
+<form method="post" th:action="@{/transferencia/paso2}" th:object="${paso2DTO}">
+    <h1>Resumen de la transferencia</h1>
+    <label>Cuenta Origen:</label><span th:text="${cuentaOrigen.iban}"></span>
     <br>
-    <p><strong>Importe:</strong> <span th:text="${transferencia.importe}"></span></p>
-    <p><strong>Concepto:</strong> <span th:text="${transferencia.concepto}"></span></p>
-    <p><strong>Fecha programada:</strong> <span th:text="${transferencia.fechaProgramada}"></span></p>
-</div>
-
-<div>
-    <h2>Verificación de seguridad</h2>
-    <p>Introduce tu código de confirmación (simulación):</p>
+    <label>Beneficiario:</label><span th:text="${transferencia.nombreBeneficiario}"></span>
     <br>
-    <form th:action="@{/transferencias/transferir/paso2}" th:object="${paso2DTO}" method="post">
-        <!-- Nombre -->
-        <label for="codigoConfirmacion">Código de confirmación: </label>
-        <input type="number" th:field="*{codigoConfirmacion}" id="codigoConfirmacion" min="1" required>
-        <br>
-        <div th:if="${#fields.hasErrors('nombreParticipante')}" th:errors="*{codigoConfirmacion}"></div>
-
-        <br><br>
-        <a th:href="@{/transferencias/transferir/paso1}">Volver al paso 1</a>
-        <button type="submit">Confirmar transferencia</button>
-
-    </form>
-</div>
+    <label>Iban de destino:</label><span th:text="${transferencia.ibanDestino}"></span>
+    <br>
+    <label>Importe:</label><span th:text="${transferencia.importe} + '€'"></span>
+    <br>
+    <label>Concepto:</label><span th:text="${transferencia.concepto}"></span>
+    <br>
+    <label>Fecha programada</label><span th:text="${transferencia.fechaProgramada}"></span>
+    <br>
+    <label>Verificacion de seguridad</label>
+    <br>
+    <label>Introduce el codigo</label>
+    <br>
+    <input type="password" th:field="*{codigo}" id="codigo" name="codigo">
+    <div th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+    <a th:href="@{/transferencia/paso1}"><button type="button">Volver al paso 1</button></a>
+    <button>Confirmar</button>
+</form>
 </body>
 </html>

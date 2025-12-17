@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Editar Inscripción</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-<h1>Editar Inscripción</h1>
-<form th:action="@{/admin/inscripciones/editar}" th:object="${inscripcion}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-
-    <label>Taller ID:</label>
-    <input type="number" th:field="*{tallerId}" required/><br/>
-
-    <label>Nombre Participante:</label>
-    <input type="text" th:field="*{nombreParticipante}" required/><br/>
-
-    <label>Email Participante:</label>
-    <input type="email" th:field="*{emailParticipante}" required/><br/>
-
-    <label>Número de Asistentes:</label>
-    <input type="number" th:field="*{numeroAsistentes}" required/><br/>
-
-    <button type="submit">Actualizar</button>
+<form method="post" th:action="@{/transferencia/admin/editar}" th:object="${transferencia}">
+    <label>Cuenta origen:</label>
+    <input th:field="*{cuentaOrigenId}">
+    <br>
+    <label>Nombre beneficiario:</label>
+    <input th:field="*{nombreBeneficiario}">
+    <br>
+    <label>Iban destino:</label>
+    <input th:field="*{ibanDestino}">
+    <br>
+    <label>importe:</label>
+    <input th:field="*{importe}">
+    <br>
+    <label>Concepto:</label>
+    <input th:field="*{concepto}">
+    <br>
+    <label>Fecha Programada:</label>
+    <input type="datetime-local" th:field="*{fechaProgramada}">
+    <br>
+    <label>Fecha creación:</label>
+    <input type="datetime-local" th:field="*{fechaCreacion}">
+    <br>
+    <label>Estado: </label>
+    <input th:field="*{estado}">
+    <br>
+    <button>Editar</button>
 </form>
-<a th:href="@{/admin/inscripciones/index}">Volver</a>
+
 </body>
 </html>
