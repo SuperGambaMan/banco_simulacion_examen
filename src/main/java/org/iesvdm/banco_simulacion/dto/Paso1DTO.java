@@ -22,7 +22,7 @@ public class Paso1DTO {
     @NotBlank(message = "No puedes dejar vacío el Nombre de Beneficiario")
     private String nombreBeneficiario;
 
-    @Size(min=1, max=29, message = "No se puede poner más de 24 dígitos")
+    @Size(min=24, max=24, message = "El iban tiene que tener 24 dígitos")
     private String ibanDestino;
 
     @NotNull(message = "No puedes dejarlo vacío el importe")
